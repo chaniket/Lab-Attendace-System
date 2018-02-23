@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+	<!-- <mvc:annotation-driven></mvc:annotation-driven> <tx:annotation-driven 
+		/> -->
+	<context:component-scan base-package="com.cb" />
+	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/attendancedb"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+
+	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	<bean id="HBannotedSesFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="datasource"></property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.cb.bean.LoginBean</value>
+				<value>com.cb.bean.RegistrationBean</value>
+				<value>com.cb.bean.Address</value>
+				<value>com.cb.bean.City</value>
+				<value>com.cb.bean.State</value>
+				<value>com.cb.bean.Country</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewresolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+<!-- 	<bean id="hbTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+	<property name="sessionFactory" ref="datasource"></property>
+	 </bean>
+ -->	<bean id="daoImpl" class="com.cb.dao.SpringMVCdaoImpl">
+		<property name="sessionFactory" ref="HBannotedSesFactory"></property>
+		<property name="jt" ref="template"></property>
+	<!-- 	<property name="hibernateTemplate" ref="hbTemplate"></property> -->
+	</bean>
+	<bean id="serviceIMPL" class="com.cb.service.SpringMVCserviceIMPL">
+		<property name="sessionFactory" ref="HBannotedSesFactory"></property>
+		<property name="springMVCdao" ref="daoImpl"></property>
+	</bean>
+
+	<bean id="delegete" class="com.cb.delegete.SpringMVCDelegete"
+		autowire="byName">
+	</bean>
+
+	<!-- <bean id="control" class="com.cb.controller.SpringMVCController" autowire="byName"> 
+		</bean> -->
+
+</beans>

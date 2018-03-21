@@ -9,6 +9,6 @@
 </head>
 <body>
 	Hi newly "WebContent/NewFile.jsp"
-	buddys ds
+	buddys ds ms
 </body>
 </html>

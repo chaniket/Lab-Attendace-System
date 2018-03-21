@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hi"WebContent/NewFile.jsp"
-	buddy
+	Hi newly "WebContent/NewFile.jsp"
+	buddys
 </body>
 </html>

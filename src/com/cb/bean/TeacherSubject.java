@@ -2,59 +2,82 @@ package com.cb.bean;
 
 import java.io.Serializable;
 
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-//@Table(name = "tbl_teacher_subject")
-//@PrimaryKeyJoinColumn(name="staff_id")
-public class TeacherSubject  implements Serializable {
+@Table(name = "tbl_teacher_subject")
+// @PrimaryKeyJoinColumn(name="staff_id")
+public class TeacherSubject implements Serializable {
 
 	private static final long serialVersionUID = -6375833799960484376L;
-	/*@Id
-	@GenericGenerator(name = "incre", strategy = "increment")
-	@GeneratedValue(generator = "incre")
-	private Integer id;
-	*/
-	/*@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "staff_id")
-	*/
+	/*
+	 * @Id
+	 * 
+	 * @GenericGenerator(name = "incre", strategy = "increment")
+	 * 
+	 * @GeneratedValue(generator = "incre") private Integer id;
+	 */
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "staff_id")
+	 */
 	@Id
 	@GenericGenerator(name = "incre", strategy = "increment")
 	@GeneratedValue(generator = "incre")
-	@Column
 	private Integer staff_id;
-	@Column(name="practical_name")
-	private String practical_name;
+	private String practical_name1;
+	private String practical_name2;
+	private String practical_name3;
 
 	public TeacherSubject() {
 
 	}
-
-	public TeacherSubject(String practical_name) {
+	
+	public TeacherSubject(Integer staff_id, String practical_name1, String practical_name2, String practical_name3) {
 		super();
-		this.practical_name = practical_name;
+		this.staff_id = staff_id;
+		this.practical_name1 = practical_name1;
+		this.practical_name2 = practical_name2;
+		this.practical_name3 = practical_name3;
 	}
 
-	public Integer getStud_id() {
+
+	public Integer getStaff_id() {
 		return staff_id;
 	}
 
-	public void setStud_id(Integer stud_id) {
-		this.staff_id = stud_id;
+	public void setStaff_id(Integer staff_id) {
+		this.staff_id = staff_id;
 	}
 
-	public String getPractical_name() {
-		return practical_name;
+	public String getPractical_name1() {
+		return practical_name1;
 	}
 
-	public void setPractical_name(String practical_name) {
-		this.practical_name = practical_name;
+	public void setPractical_name1(String practical_name1) {
+		this.practical_name1 = practical_name1;
+	}
+
+	public String getPractical_name2() {
+		return practical_name2;
+	}
+
+	public void setPractical_name2(String practical_name2) {
+		this.practical_name2 = practical_name2;
+	}
+
+	public String getPractical_name3() {
+		return practical_name3;
+	}
+
+	public void setPractical_name3(String practical_name3) {
+		this.practical_name3 = practical_name3;
 	}
 
 	public static long getSerialversionuid() {
@@ -63,6 +86,8 @@ public class TeacherSubject  implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TeacherSubject [stud_id=" + staff_id + ", practical_name=" + practical_name + "]";
+		return "TeacherSubject [staff_id=" + staff_id + ", practical_name1=" + practical_name1 + ", practical_name2="
+				+ practical_name2 + ", practical_name3=" + practical_name3 + "]";
 	}
+
 }

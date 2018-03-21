@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,11 +14,11 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="assests/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=application.getContextPath()%>/assests/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="assests/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=application.getContextPath()%>/assests/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
-  <link href="assests/css/sb-admin.css" rel="stylesheet">
+  <link href="<%=application.getContextPath()%>/assests/css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="bg-dark">
@@ -22,7 +26,8 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form>
+        
+        <form:form commandName="studBean"  methodParam="post">      
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -60,19 +65,19 @@
             </div>
           </div>
           <a class="btn btn-primary btn-block" href="login.html">Register</a>
-        </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          </form:form>
+      <div class="text-center">
+          <a class="d-block small mt-3" href="login.jsp">Login Page</a>
+          <a class="d-block small" href="forgot-password.jsp">Forgot Password?</a>
         </div>
       </div>
     </div>
   </div>
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<%=application.getContextPath()%>/assests/vendor/jquery/jquery.min.js"></script>
+  <script src="<%=application.getContextPath()%>/assests/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<%=application.getContextPath()%>/assests/vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 
 </html>

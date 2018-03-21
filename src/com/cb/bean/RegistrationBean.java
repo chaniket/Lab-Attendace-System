@@ -1,5 +1,6 @@
 package com.cb.bean;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,9 +37,12 @@ public class RegistrationBean implements Serializable {
 	private String email;
 	private String password;
 	private Long mobileNo;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "a_id")
 	private Address address;
+
+	
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -106,7 +111,8 @@ public class RegistrationBean implements Serializable {
 	@Override
 	public String toString() {
 		return "RegistrationBean [user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", gender=" + gender + ", email=" + email + ", mobileNo=" + mobileNo + ", address=" + address + "]";
+				+ ", gender=" + gender + ", email=" + email + ", password=" + password + ", mobileNo=" + mobileNo
+				+ ", address=" + address + "]";
 	}
 
 }

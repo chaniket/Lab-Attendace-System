@@ -22,29 +22,77 @@
 <h1>Please enable your javascript to enjoy this application features</h1>
 
 </noscript>
+
+	
 	<div class="container">
 		<div class="row">
+		
 		<h3>${succesMsg} ${errorMsg}</h3>
 </div>		
 	<div class="row">
 	<%-- <c:url var="addAction" value="<%=application.getContextPath() %>/spring-mvc/registration" ></c:url>--%>		
-			<form:form action="./spring-mvc/registration" method="POST"	id="userFrom" commandName="commandcascade" enctype="multipart/form-data"	onSubmit="return validation();">
+			<form:form action="../spring-mvc/registration" methodParam="POST" 
+				id="userFrom" commandName="commandcascade" 
+				onSubmit="return validation();">
+				enctype="multipart/form-data"
+		<div class="col-md-4">
+
+	<label>First Name:</label><br>
+	<input type="text" class="form-control" name="register.firstName"id="firstName" /><br> 
+	<label>Last Name:</label><br>
+	<input type="text" class="form-control" name="register.lastName"id="lastName" /><br> 
+	<label>Gender:</label><br>
+	 <select class="form-control" name="register.gender" id="gender">
+	<option selected="selected" value="0">Select gender</option>
+	<option value="Male">Male</option>
+	<option value="Female">Female</option>
+	</select><br>
+	 <label>Email:</label>&emsp;&emsp;<span style="color: red;">{{emailMsg}}</span> <br>
+	<input type="text" class="form-control" name="register.email" ng-model="email" title="Enter Correct Email eg.jhon@gmail.com" ng-pattern="isValidEmail" id="email" ng-blur="isEmailExists({'email':email})"/><br>
+	 <label>Password:</label><br>
+	<input type="password" class="form-control"name="register.password" id="password" /><br> 
+	<label>Confirm Password:</label><br>
+	<input type="password" class="form-control" name="confirm_password" id="confirm_password" /><br>
+</div>
+<div class="col-md-4">
+	<label>Mobile no:</label><br>
+	<input type="text" class="form-control" name="register.mobileNo" id="mobileNo" /><br> 
+
 	
-	<!-- <input type="text" class="form-control" name="register.firstName"id="firstName" /><br> -->
-		<input type="text" class="form-control" name="register.lastName"id="lastName" /><br> 
+	
+	<!--<label>Country:</label><br>
+	 <select class="form-control" name="country.c_Id" id="c_Id" ng-model="c_Id"	ng-change="getStateData({'c_id':c_Id})">
+		<option  ng-repeat="x in country_data"  ng-value={{x.c_Id}}>{{x.c_Name}}</option>
+	</select><br>
+	  <label>State:</label><br> 
+		<select class="form-control" name="state.s_Id" ng-model="s_Id" id="s_Id" ng-change="getCityData({'s_Id':s_Id})">
+		<option ng-repeat="x in state_data" ng-value={{x.s_Id}}>{{x.s_Name}}</option>
+	</select><br> 
+	 
+	<label>City:</label><br>
+	 <select class="form-control" name="city.city_Id" id="city_Id">
+	<option ng-repeat="x in city_data" value="{{x.city_Id}}">{{x.city_Name}}</option>
+	</select><br>
+	-->
 	
 	<label>Pincode:</label><br>
 	<input type="number" class="form-control" name="address.zipcode" id="zipcode" /><br> 
 	<label>Address:</label><br>
 	<input type="text" class="form-control" name="address.address" id="address" /><br>
-	<div class="col-md-4">
+	
+	
+	<input type="submit" style="width: 176px;" class="btn btn-success"
+						name="submit" onClick="return validates();" value="submit">
+		<input type="reset" style="width: 176px;" class="btn btn-primary"
+						name="reset" value="Reset">
+	
+				</div>
+				<div class="col-md-4">
 				<label>User Image</label>
 				<input type="file" onchange="loadFile(event)" ng-model="userImage" id="userImage" name="userImage1">
 				<img id="output" class="img-thumbnail" height="200px" width="200px" style="display: none"/>
-		</div>
-	<input type="submit">
-					
-				</form:form>
+				</div>
+			</form:form>
 			<!-- row -->
 		</div>
 		<!-- container -->

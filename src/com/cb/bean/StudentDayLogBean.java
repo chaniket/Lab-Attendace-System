@@ -13,10 +13,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @Table(name = "tbl_student_day_log")
+@SelectBeforeUpdate
+@DynamicUpdate
 public class StudentDayLogBean implements Serializable {
 	
 	private static final long serialVersionUID = -4770087836779759852L;

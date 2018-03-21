@@ -5,8 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="practicalInfo")
+@Table(name = "practicalInfo")
 public class PracticalInfoBean implements Serializable {
 	private static final long serialVersionUID = 4460603615167216127L;
 	@Id

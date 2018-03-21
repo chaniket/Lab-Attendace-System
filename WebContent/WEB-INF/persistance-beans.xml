@@ -14,58 +14,26 @@
 http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	
-	<!-- <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/> -->
-	
-<import resource="aop.xml"/>
-
-<!-- Enables the Spring MVC @Controller programming model -->
-	<mvc:annotation-driven ></mvc:annotation-driven>
-	<!-- <annotation-driven /> -->
-
-	<context:component-scan base-package="com.cb" />
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>properties/database.properties</value>
-		</property>
-	</bean>
-	<bean id="viewresolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
-	
+	<context:component-scan base-package="com.cb.dao" />	
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
-			<value>${jdbc.driverClassName}</value>
+			<value>com.mysql.jdbc.Driver</value>
 		</property>
-		<property name="url" value="${jdbc.url}"></property>
-		<property name="username" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/attendancedb"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
 	</bean>
 
 	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" value="#{datasource}"></property>
-	</bean>
-	
-	<bean id="txMgr"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="datasource"></property>
 	</bean>
-
-	<tx:advice id="txAdvice" transaction-manager="txMgr">
-		<tx:attributes>
-			<tx:method name="insert*" propagation="REQUIRED" read-only="false" />
-		</tx:attributes>
-	</tx:advice>
 	
-
-	<bean id="HBannotedSesFactory"
+	<!-- Note : implement JdbcDaoSuppoet on your daoImpl class -->
+	<bean id="customerDAO" class="com.cb.dao.SpringMVCdaoImpl" autowire-candidate="false">
+		<property name="dataSource" ref="datasource" />
+	</bean>
+	
+	 	<bean id="HBannotedSesFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="datasource"></property>
 		<property name="annotatedClasses">
@@ -98,24 +66,5 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 			</props>
 		</property>
 	</bean>
-
-
-<!-- 	<bean id="daoImpl" class="com.cb.dao.SpringMVCdaoImpl">
-		<property name="sessionFactory" ref="HBannotedSesFactory"></property>
-		<property name="jt" ref="template"></property>
-	</bean>
- -->
-	<bean id="serviceIMPL" class="com.cb.service.SpringMVCserviceIMPL">
-	<!-- 	<property name="sessionFactory" ref="HBannotedSesFactory"></property>
-		<property name="springMVCdao" ref="daoImpl"></property> -->
-		</bean>
-
-	<bean id="delegete" class="com.cb.delegete.SpringMVCDelegete"
-		autowire="byName">
-	</bean>
-	<bean id="teacherDelegate" class="com.cb.delegete.SpringMVCTeacherDelegate">
-	</bean>
-	<!-- <bean id="teacherService" class="com.cb.service.SpringMVCTeacherServiceImpl"></bean>
-	<bean id="teacherDaoImpl" class="com.cb.dao.SpringMVCTeacherDaoImpl"></bean>
-	 -->
+	
 </beans>

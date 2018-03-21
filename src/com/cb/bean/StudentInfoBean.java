@@ -2,15 +2,23 @@ package com.cb.bean;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @Table(name="tbl_studentInfo")
+//@DynamicInsert
+@SelectBeforeUpdate
+@DynamicUpdate
+
 public class StudentInfoBean implements Serializable{
 	
 	private static final long serialVersionUID = -108766680433591186L;
@@ -22,6 +30,7 @@ public class StudentInfoBean implements Serializable{
 	private String last_name;
 	private Long mobile_no;
 	private String className;
+	@NaturalId
 	private String email;
 
 	public StudentInfoBean() {

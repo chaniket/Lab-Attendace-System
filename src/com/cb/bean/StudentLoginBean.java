@@ -9,8 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.SelectBeforeUpdate;
+
 @Entity
 @Table(name = "tbl_studentLogin")
+@SelectBeforeUpdate
+@DynamicUpdate
 public class StudentLoginBean implements Serializable{
 	private static final long serialVersionUID = 2140097085987834807L;
 	@Id
@@ -18,6 +24,7 @@ public class StudentLoginBean implements Serializable{
 	@JoinColumn(name = "stud_id")
 	private StudentInfoBean bean;
 	//@Id
+	//@NaturalId
 	private String username;
 	private String password;
 

@@ -1,0 +1,27 @@
+@EnableWebMvc
+@Configuration
+@ComponentScan("com.yourdomain")
+@EnableTransactionManagement(mode=AdviceMode.ASPECTJ)
+public class ApplicationConfig extends WebMvcConfigurerAdapter {
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+
+        //...
+    }
+
+    @Bean
+    public JpaTransactionManager transactionManager() {
+
+        JpaTransactionManager bean = new JpaTransactionManager(entityManagerFactory().getObject());
+        return bean ;
+    }
+
+    @Bean
+    public AnnotationTransactionAspect annotationTransactionAspect() {
+
+        AnnotationTransactionAspect bean = AnnotationTransactionAspect.aspectOf();
+        bean.setTransactionManager(transactionManager());
+        return bean;
+    }
+}

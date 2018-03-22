@@ -6,9 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+
+<link rel="stylesheet" href="<%=application.getContextPath() %>/Js/sample.css">
+<script type="text/javascript" src="<%=application.getContextPath() %>/Js/autoCssRefresh.js"></script>
+
 </head>
 <body>
 	Hi newly "WebContent/NewFile.jsp"
-	buddys ds ms
+<label>	buddys ds ms</label>
+<input type="text">
+
 </body>
 </html>
